@@ -10,7 +10,7 @@ Bu proje, bireysel portföy ve kariyer geçmişi sergilemek amacıyla, Spring Bo
 ## **Teknoloji Yığını**
 
 ### **Backend (Spring Boot)**
-- **Java 17 veya üstü**
+- **Java 21**
 - **Spring Boot Starter Web**: RESTful API geliştirmek için.
 - **Spring Security**: Admin paneli için JWT tabanlı kimlik doğrulama.
 - **Hibernate & JPA**: Veritabanı işlemleri.
