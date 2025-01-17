@@ -4,7 +4,7 @@ KEY(username)
 VALUES (1, 'admin', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'admin@example.com', 'Admin User', 'ADMIN', true, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- About data
-MERGE INTO about (id, full_name, title, description, location, email, phone, linkedin_url, github_url, summary, profile_image_url, created_at, updated_at, active)
+MERGE INTO about (id, full_name, title, description, location, email, phone, linkedin_url, github_url, summary, image_url, created_at, updated_at, active)
 KEY(id)
 VALUES (1, 'Ahmet Yılmaz', 'Senior Full Stack Developer', 
 'Tutkulu ve deneyimli bir yazılım geliştirici', 

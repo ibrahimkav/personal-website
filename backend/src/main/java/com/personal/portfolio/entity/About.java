@@ -44,9 +44,6 @@ public class About extends BaseEntity {
     @Column(length = 2000)
     private String summary;
 
-    @Column(name = "profile_image_url", length = 500)
-    private String profileImageUrl;
-
     @Column(name = "image_url", length = 500)
     private String imageUrl;
 

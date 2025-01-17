@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -21,18 +22,22 @@ public class JwtTokenProvider {
 
     private final Key key;
     private final long expiration;
+    private final UserDetailsService userDetailsService;
 
     public JwtTokenProvider(
             @Value("${jwt.secret}") String secret,
-            @Value("${jwt.expiration}") long expiration) {
+            @Value("${jwt.expiration}") long expiration,
+            UserDetailsService userDetailsService) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.expiration = expiration;
+        this.userDetailsService = userDetailsService;
     }
 
     public String generateToken(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
-        claims.put("role", userDetails.getAuthorities().iterator().next().getAuthority().replace("ROLE_", ""));
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        Claims claims = Jwts.claims().setSubject(userPrincipal.getUsername());
+        claims.put("role", userPrincipal.getAuthorities().iterator().next().getAuthority().replace("ROLE_", ""));
+        claims.put("id", userPrincipal.getId());
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
@@ -48,6 +53,7 @@ public class JwtTokenProvider {
     public String generateToken(User user) {
         Claims claims = Jwts.claims().setSubject(user.getUsername());
         claims.put("role", user.getRole().name());
+        claims.put("id", user.getId());
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
@@ -91,12 +97,19 @@ public class JwtTokenProvider {
                 .getBody();
 
         String username = claims.getSubject();
+        Long userId = claims.get("id", Long.class);
         String role = claims.get("role", String.class);
 
+        UserPrincipal userPrincipal = UserPrincipal.builder()
+                .id(userId)
+                .username(username)
+                .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)))
+                .build();
+        
         return new UsernamePasswordAuthenticationToken(
-                username,
+                userPrincipal,
                 null,
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role))
+                userPrincipal.getAuthorities()
         );
     }
 } 

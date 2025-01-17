@@ -57,7 +57,7 @@ public class TestUtil {
         about.setLinkedinUrl("https://linkedin.com/in/johndoe");
         about.setGithubUrl("https://github.com/johndoe");
         about.setSummary("Full-stack developer with expertise in Java and React");
-        about.setProfileImageUrl("https://example.com/profile.jpg");
+        about.setImageUrl("https://example.com/profile.jpg");
         about.setCreatedAt(LocalDateTime.now());
         about.setUpdatedAt(LocalDateTime.now());
         about.setActive(true);
