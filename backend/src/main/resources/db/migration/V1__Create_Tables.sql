@@ -1,84 +1,84 @@
--- Users table
+-- Create users table
 CREATE TABLE users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    full_name VARCHAR(100),
+    full_name VARCHAR(100) NOT NULL,
     role VARCHAR(20) NOT NULL,
     email_verified BOOLEAN DEFAULT FALSE,
     reset_password_token VARCHAR(100),
     verification_token VARCHAR(100),
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
-    active BOOLEAN DEFAULT TRUE
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- About table
+-- Create about table
 CREATE TABLE about (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
-    title VARCHAR(100) NOT NULL,
-    description VARCHAR(1000),
+    title VARCHAR(100),
+    description TEXT,
     location VARCHAR(100),
     email VARCHAR(100),
     phone VARCHAR(20),
-    linkedin_url VARCHAR(200),
-    github_url VARCHAR(200),
-    summary VARCHAR(2000),
-    profile_image_url VARCHAR(500),
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    linkedin_url VARCHAR(255),
+    github_url VARCHAR(255),
+    summary TEXT,
+    image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     active BOOLEAN DEFAULT TRUE
 );
 
--- Experiences table
+-- Create experiences table
 CREATE TABLE experiences (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    company VARCHAR(100) NOT NULL,
     position VARCHAR(100) NOT NULL,
-    description VARCHAR(1000),
+    company VARCHAR(100) NOT NULL,
+    description TEXT,
     start_date DATE NOT NULL,
     end_date DATE,
     location VARCHAR(100),
     is_current BOOLEAN DEFAULT FALSE,
-    company_url VARCHAR(500),
-    company_logo_url VARCHAR(500),
-    experience_order INTEGER,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    company_url VARCHAR(255),
+    company_logo_url VARCHAR(255),
+    experience_order INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     active BOOLEAN DEFAULT TRUE
 );
 
--- Projects table
+-- Create projects table
 CREATE TABLE projects (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    description VARCHAR(1000),
-    technologies VARCHAR(500),
-    github_url VARCHAR(500),
-    demo_url VARCHAR(500),
-    image_url VARCHAR(500),
+    description TEXT,
+    technologies VARCHAR(255),
+    github_url VARCHAR(255),
+    demo_url VARCHAR(255),
+    image_url VARCHAR(255),
     featured BOOLEAN DEFAULT FALSE,
     project_order INT,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     active BOOLEAN DEFAULT TRUE
 );
 
--- Contacts table
+-- Create contacts table
 CREATE TABLE contacts (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     phone VARCHAR(20),
     subject VARCHAR(200) NOT NULL,
-    message VARCHAR(1000) NOT NULL,
+    message TEXT NOT NULL,
     is_read BOOLEAN DEFAULT FALSE,
     is_replied BOOLEAN DEFAULT FALSE,
-    reply_message VARCHAR(1000),
+    reply_message TEXT,
     reply_date TIMESTAMP,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     active BOOLEAN DEFAULT TRUE
 ); 

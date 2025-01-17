@@ -8,6 +8,7 @@ import com.personal.portfolio.service.AboutService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +39,8 @@ public class AboutServiceImpl implements AboutService {
         About about = new About();
         mapToAbout(aboutRequest, about);
         about.setActive(true);
+        about.setCreatedAt(LocalDateTime.now());
+        about.setUpdatedAt(LocalDateTime.now());
         aboutRepository.deactivateAllAbouts();
         return mapToAboutResponse(aboutRepository.save(about));
     }
@@ -67,7 +70,6 @@ public class AboutServiceImpl implements AboutService {
                 .linkedinUrl(about.getLinkedinUrl())
                 .githubUrl(about.getGithubUrl())
                 .summary(about.getSummary())
-                .profileImageUrl(about.getProfileImageUrl())
                 .imageUrl(about.getImageUrl())
                 .active(about.isActive())
                 .build();
@@ -83,7 +85,6 @@ public class AboutServiceImpl implements AboutService {
         about.setLinkedinUrl(aboutRequest.getLinkedinUrl());
         about.setGithubUrl(aboutRequest.getGithubUrl());
         about.setSummary(aboutRequest.getSummary());
-        about.setProfileImageUrl(aboutRequest.getProfileImageUrl());
         about.setImageUrl(aboutRequest.getImageUrl());
     }
 } 

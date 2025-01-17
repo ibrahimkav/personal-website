@@ -42,9 +42,6 @@ public class AboutRequest {
     @Size(max = 2000, message = "Summary cannot exceed 2000 characters")
     private String summary;
 
-    @Size(max = 500, message = "Profile image URL cannot exceed 500 characters")
-    private String profileImageUrl;
-
     @Size(max = 500, message = "Image URL cannot exceed 500 characters")
     private String imageUrl;
 } 

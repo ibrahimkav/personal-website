@@ -20,7 +20,6 @@ public class AboutResponse {
     private String linkedinUrl;
     private String githubUrl;
     private String summary;
-    private String profileImageUrl;
     private String imageUrl;
     private Boolean active;
 } 
