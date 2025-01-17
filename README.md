@@ -75,6 +75,8 @@ Bu proje, bireysel portföy ve kariyer geçmişi sergilemek amacıyla, Spring Bo
 | `POST`          | `/api/projects`           | Yeni proje ekler.                     |
 | `DELETE`        | `/api/projects/{id}`      | Projeyi siler.                        |
 | `POST`          | `/api/contact`            | İletĿişim formu mesajlarını kaydeder. |
+| `GET`           | `/api/cv`            | CV'yi getirir. |
+
 
 ---
 
